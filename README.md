@@ -1,6 +1,6 @@
 # 🏗 BuildChain – Decentralized Construction Funding on Tezos
 
-**BuildChain** is a decentralized smart contract and front-end application built on the Tezos blockchain. It enables verified contractors to raise community-based funding for construction projects while providing investors with transparent ROI sharing, milestone tracking, and proof-based fund unlocking.
+**BuildChain** is a decentralized smart contract and front-end application built on the Tezos blockchain. It enables verified contractors to raise community-based funding for commercial construction projects while providing investors with transparent ROI sharing, milestone tracking, and proof-based fund unlocking.
 
 ---
 
