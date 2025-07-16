@@ -75,9 +75,9 @@ Use [Temple Wallet](https://templewallet.com/) or Beacon-compatible wallet with 
 
 - A contractor needs $10,000 to build a commercial concrete slab.
 - 10 investors each contribute $1,000.
-- Investor pays 50 ꜩ to access documents (credited back if they invest).
-- Contractor receives 30% upfront, then weekly payouts.
-- Project completes and $5,000 in profit is deposited.
+- Investor pays 50 ꜩ to access documents (credited back if they invest). This allow access to private information; such as; contract agreement, schedule, blueprints, location, potential profits, and client, goverment and/or private investor.
+- Contractor receives 30% upfront to start pre-work and/or finance material needed, then weekly payouts to cost labor.
+- Project completes in one week and $5,000 in profit is deposited as soon as client make the payment (30 to 45 days).
 - Contractor receives 49% ($2,450), and investors share 51% ($2,550) proportionally.
 - Investor can benefit from commercial trade jobs, with a high ROI in a short period of time.
 
