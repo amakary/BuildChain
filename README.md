@@ -30,7 +30,7 @@
 ## 📁 Project Structure
 
 ```
-deploy/
+UI/
 ├── interaction.html         # Full smart contract interaction panel
 ├── project-details.html     # Detailed view of one construction project
 ├── projects.html            # Public listing of active projects
