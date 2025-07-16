@@ -1,0 +1,21 @@
+// SmartContract.jsligo
+// BuildChain Smart Contract
+
+type investor = address;
+type shares = map<investor, nat>;
+
+type storage = {
+  contractor: address,
+  fundingCap: mutez,
+  viewerFee: mutez,
+  graceDays: int,
+  investedAmount: mutez,
+  projectCompleted: bool,
+  profitDeposited: bool,
+  profitDueBy: option<timestamp>,
+  investorShares: shares,
+  viewers: list<address>
+};
+
+// Add your entrypoints here
+
