@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Available Projects | BuildChain</title>
+  <style>
+    body { font-family: sans-serif; background: #f8f8f8; padding: 2rem; }
+    .project { background: white; padding: 1rem; margin-bottom: 1rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .project h3 { margin: 0 0 0.5rem 0; }
+    .btn { display: inline-block; padding: 0.5rem 1rem; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h1>🚧 Available Projects for Investment</h1>
+  <div id="projects-container">Loading...</div>
+
+  <script>
+    const projectList = [
+      {
+        id: 1,
+        title: "Foundation Repair - Newark, DE",
+        goal: 10000,
+        roi: "50%",
+        duration: "45 days",
+        description: "Concrete slab and foundation overhaul for a local community building."
+      },
+      {
+        id: 2,
+        title: "Retail Framing - Dover, DE",
+        goal: 15000,
+        roi: "42%",
+        duration: "60 days",
+        description: "Framing for a 3,500 sq.ft. retail facility by a seasoned contractor."
+      }
+    ];
+
+    const container = document.getElementById("projects-container");
+    container.innerHTML = "";
+    projectList.forEach(project => {
+      const div = document.createElement("div");
+      div.className = "project";
+      div.innerHTML = `
+        <h3>${project.title}</h3>
+        <p><strong>Funding Goal:</strong> ${project.goal} ꜩ &nbsp; | &nbsp; <strong>ROI:</strong> ${project.roi} in ${project.duration}</p>
+        <p>${project.description}</p>
+        <a href="project-details.html?project=${project.id}" class="btn">View Details</a>
+      `;
+      container.appendChild(div);
+    });
+  </script>
+</body>
+</html>
