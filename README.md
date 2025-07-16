@@ -7,4 +7,4 @@ BuildChain enables contractors to publish real-world construction projects, rais
 ...
 
 ## 🙌 Credits
-Built with ❤️ using Taquito, Beacon, and JsLIGO by builders for builders.
+Built with ❤️ from Delaware U.S. using Taquito, Beacon, and JsLIGO by BRO Builder LLC.
