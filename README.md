@@ -83,7 +83,7 @@ Example:
 🕒 Shorter timelines = faster returns.
 
 ## 💡 Use Case Example
-- A contractor needs $10,000 to build a commercial concrete slab. This amount cover material, labor, and operation expenses. The bid was approved for $15000.
+- A contractor needs $10,000 to build a commercial concrete slab for a new coffee shop in town. The funds needed covers material, labor, and operation expenses. The bid was approved for $15000.
 - 10 investors each contribute $1,000.
 - Investor pays 50 ꜩ to access documents (credited back if they invest). This allow access to private information; such as; contract agreement, Licenses, schedule, blueprints, location, and client, goverment and/or private investor.
 - Contractor receives 30% upfront to start pre-work, operation and/or finance material needed, then weekly payouts to cost labor.
