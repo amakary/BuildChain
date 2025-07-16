@@ -119,7 +119,7 @@ limitations under the License.
 ## 📫 Contact
 
 Have questions or want to partner with us?  
-Reach out at **info@buildchain.dev**
+Reach out at **frans@brobuilder.llc**
 
 ## 🙌 Credits
 Built with ❤️ from Delaware U.S. using Taquito, Beacon, and JsLIGO by BRO Builder LLC.
