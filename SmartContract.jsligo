@@ -1,0 +1,84 @@
+type investor = {
+  addr: address,
+  amount: tez
+};
+
+type storage = {
+  contractor: address,
+  investorBalances: map<address, tez>,
+  totalFunded: tez,
+  fundingCap: tez,
+  viewerFee: tez,
+  paidViewers: map<address, tez>,
+  projectCompleted: bool,
+  paymentGracePeriod: nat,          // in seconds
+  profitDueBy: option<timestamp>,   // timestamp when profit must be deposited
+  profitDeposited: bool,
+  expectedProfit: tez,
+  investorSharePercent: nat,        // e.g. 51n
+  contractorSharePercent: nat       // e.g. 49n
+};
+
+type parameter =
+  | Fund
+  | AccessDocuments
+  | MarkProjectComplete
+  | DepositProfit
+
+[@entry]
+let main = ([param, store]: parameter * storage): list(operation) * storage =>
+  match param with
+  | Fund ->
+      if store.totalFunded >= store.fundingCap then
+        (failwith("Funding cap reached") : list(operation) * storage)
+      else
+        let prev = Map.find_opt(Tezos.sender, store.investorBalances) in
+        let contributed = match prev with
+                          | Some(amount) -> amount + Tezos.amount
+                          | None -> Tezos.amount in
+        let updatedMap = Map.add(Tezos.sender, contributed, store.investorBalances) in
+        let newTotal = store.totalFunded + Tezos.amount in
+        ([] : list(operation), { store with investorBalances = updatedMap; totalFunded = newTotal })
+
+  | AccessDocuments ->
+      if Tezos.amount < store.viewerFee then
+        (failwith("Insufficient access fee") : list(operation) * storage)
+      else if Map.mem(Tezos.sender, store.paidViewers) then
+        (failwith("Already paid") : list(operation) * storage)
+      else
+        let updatedViewers = Map.add(Tezos.sender, Tezos.amount, store.paidViewers) in
+        ([] : list(operation), { store with paidViewers = updatedViewers })
+
+  | MarkProjectComplete ->
+      if Tezos.sender <> store.contractor then
+        (failwith("Only contractor can mark complete") : list(operation) * storage)
+      else if store.projectCompleted then
+        (failwith("Already completed") : list(operation) * storage)
+      else
+        let due = Tezos.now + int(store.paymentGracePeriod) in
+        ([] : list(operation), { store with projectCompleted = true; profitDueBy = Some(due) })
+
+  | DepositProfit ->
+      if Tezos.sender <> store.contractor then
+        (failwith("Only contractor can deposit profit") : list(operation) * storage)
+      else if store.profitDeposited then
+        (failwith("Profit already deposited") : list(operation) * storage)
+      else if not store.projectCompleted then
+        (failwith("Project not completed") : list(operation) * storage)
+      else
+        let contractorShare = (Tezos.amount * store.contractorSharePercent) / 100n in
+        let investorShare = Tezos.amount - contractorShare in
+
+        let ops = Map.fold (
+          (addr, amt: tez) (acc: list(operation)) =>
+            let share = (amt * investorShare) / store.fundingCap in
+            let op = Tezos.transaction(unit, share, addr) in
+            op :: acc
+        ) store.investorBalances ([]: list(operation)) in
+
+        let contractorOp = Tezos.transaction(unit, contractorShare, store.contractor) in
+        contractorOp :: ops, { store with profitDeposited = true }
+
+[@view]
+let getProfitDueDate = (store: storage): option<timestamp> =>
+  store.profitDueBy
