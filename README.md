@@ -83,12 +83,12 @@ Example:
 🕒 Shorter timelines = faster returns.
 
 ## 💡 Use Case Example
-- A contractor needs $10,000 to build a commercial concrete slab.
+- A contractor needs $10,000 to build a commercial concrete slab. This amount cover material, labor, and operation expenses. The bid was approved for $15000.
 - 10 investors each contribute $1,000.
-- Investor pays 50 ꜩ to access documents (credited back if they invest). This allow access to private information; such as; contract agreement, Licenses, schedule, blueprints, location, potential profits, and client, goverment and/or private investor.
-- Contractor receives 30% upfront to start pre-work and/or finance material needed, then weekly payouts to cost labor.
+- Investor pays 50 ꜩ to access documents (credited back if they invest). This allow access to private information; such as; contract agreement, Licenses, schedule, blueprints, location, and client, goverment and/or private investor.
+- Contractor receives 30% upfront to start pre-work, operation and/or finance material needed, then weekly payouts to cost labor.
 - Project completes in one week and $5,000 in profit is deposited as soon as client make the payment (30 to 45 days).
-- Contractor receives 49% ($2,450), and investors share 51% ($2,550) proportionally.
+- Contractor receives 49% ($2,450), and investors share 51% ($2,550) proportionally, meaning each investor receives $1250 after the job is completed and payment is made from client.
 - Investor can benefit from commercial trade jobs, with a high ROI in a short period of time.
 
 ---
