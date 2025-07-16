@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Deploy BuildChain Smart Contract</title>
+  <script src="https://unpkg.com/@taquito/taquito@18.2.0/dist/taquito.min.js"></script>
+  <script src="https://unpkg.com/@taquito/beacon-wallet@18.2.0/dist/taquito-beacon-wallet.umd.min.js"></script>
+</head>
+<body>
+  <h1>Deploy BuildChain Smart Contract</h1>
+  <button onclick="connectWallet()">Connect Wallet</button><br><br>
+  <label>Contractor Address:</label><input id="contractor" type="text"><br>
+  <label>Funding Cap (ꜩ):</label><input id="cap" type="number"><br>
+  <label>Viewer Fee (ꜩ):</label><input id="fee" type="number"><br>
+  <label>Grace Period (days):</label><input id="grace" type="number"><br>
+  <button onclick="deployContract()">Deploy</button>
+  <p id="status">Status: Not connected</p>
+
+  <script>
+    let Tezos = new taquito.TezosToolkit("https://ghostnet.ecadinfra.com");
+    const { BeaconWallet } = beaconWallet;
+    const wallet = new BeaconWallet({ name: "BuildChain Deployer" });
+    Tezos.setWalletProvider(wallet);
+    let userAddress;
+
+    async function connectWallet() {
+      await wallet.requestPermissions();
+      userAddress = await wallet.getPKH();
+      document.getElementById("status").innerText = "Connected: " + userAddress;
+    }
+
+    async function deployContract() {
+      const contractor = document.getElementById("contractor").value;
+      const cap = parseInt(document.getElementById("cap").value);
+      const fee = parseInt(document.getElementById("fee").value);
+      const grace = parseInt(document.getElementById("grace").value);
+
+      const storage = {
+        contractor,
+        fundingCap: cap * 1000000,
+        viewerFee: fee * 1000000,
+        graceDays: grace,
+        investedAmount: 0,
+        projectCompleted: false,
+        profitDeposited: false,
+        profitDueBy: null,
+        investorShares: {},
+        viewers: []
+      };
+
+      const michelsonCode = `parameter ...; storage ...; code { ... };`; // Replace with compiled code
+
+      const op = await Tezos.wallet.originate({
+        code: michelsonCode,
+        storage
+      }).send();
+      await op.confirmation();
+      const contract = await op.contract();
+      document.getElementById("status").innerText = "Deployed at: " + contract.address;
+    }
+  </script>
+</body>
+</html>
