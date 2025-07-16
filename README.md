@@ -71,8 +71,18 @@ Use [Temple Wallet](https://templewallet.com/) or Beacon-compatible wallet with 
 
 ---
 
-## 💡 Use Case Example
+💡 The Game-Changer: Trade-Based Funding
+Unlike traditional real estate investments that lock up your money for months or years, BuildChain focuses on individual trades within large commercial projects.
 
+Example:
+- A 12-unit apartment building takes 8–12 months to build.
+- But the concrete slab? That’s done in 7 days.
+- Once the slab is poured and inspected, the builder gets paid within the next 30 days.
+- And so do you.
+
+🕒 Shorter timelines = faster returns.
+
+## 💡 Use Case Example
 - A contractor needs $10,000 to build a commercial concrete slab.
 - 10 investors each contribute $1,000.
 - Investor pays 50 ꜩ to access documents (credited back if they invest). This allow access to private information; such as; contract agreement, schedule, blueprints, location, potential profits, and client, goverment and/or private investor.
