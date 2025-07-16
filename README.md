@@ -71,7 +71,7 @@ Use [Temple Wallet](https://templewallet.com/) or Beacon-compatible wallet with 
 
 ---
 
-💡 The Game-Changer: Trade-Based Funding
+## 💡 The Game-Changer: Trade-Based Funding
 Unlike traditional real estate investments that lock up your money for months or years, BuildChain focuses on individual trades within large commercial projects.
 
 Example:
