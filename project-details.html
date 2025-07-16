@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Details | BuildChain</title>
+  <script src="https://unpkg.com/@taquito/taquito@18.2.0/dist/taquito.min.js"></script>
+  <script src="https://unpkg.com/@taquito/beacon-wallet@18.2.0/dist/taquito-beacon-wallet.umd.min.js"></script>
+  <style>
+    body { font-family: sans-serif; background: #f2f2f2; padding: 2rem; max-width: 800px; margin: auto; }
+    .header { margin-bottom: 1rem; }
+    .btn { padding: 0.5rem 1rem; margin: 0.5rem 0; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    #status, #contract-details { margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1 id="project-title">BuildChain Project Details</h1>
+    <button class="btn" onclick="connectWallet()">🔌 Connect Wallet</button>
+    <p id="wallet-status">Not connected</p>
+  </div>
+
+  <h3>📃 Contract Info</h3>
+  <div id="contract-details">Loading...</div>
+
+  <h3>📁 Access Documents</h3>
+  <p>To view legal/financial documents, pay a 50 ꜩ viewer fee. This is credited if you invest.</p>
+  <button class="btn" onclick="payViewerFee()">🔐 Pay Viewer Fee</button>
+
+  <h3>💸 Invest in Project</h3>
+  <input id="amount" type="number" placeholder="Enter amount in ꜩ" />
+  <button class="btn" onclick="fundProject()">💰 Invest</button>
+
+  <p id="status"></p>
+
+  <script>
+    const { BeaconWallet } = beaconWallet;
+    let Tezos = new taquito.TezosToolkit("https://ghostnet.ecadinfra.com");
+    const wallet = new BeaconWallet({ name: "BuildChainApp" });
+    Tezos.setWalletProvider(wallet);
+    let userAddress;
+    let contractAddress = "KT1..."; // Update with deployed address
+
+    async function connectWallet() {
+      await wallet.requestPermissions();
+      userAddress = await wallet.getPKH();
+      document.getElementById("wallet-status").innerText = "Connected: " + userAddress;
+      loadProjectData();
+    }
+
+    async function loadProjectData() {
+      const contract = await Tezos.contract.at(contractAddress);
+      const storage = await contract.storage();
+      const html = `
+        <strong>Contractor:</strong> ${storage.contractor}<br/>
+        <strong>Funding Goal:</strong> ${storage.fundingCap} ꜩ<br/>
+        <strong>Viewer Fee:</strong> ${storage.viewerFee} ꜩ<br/>
+        <strong>Profit Deadline:</strong> ${new Date(Number(storage.profitDueby)).toLocaleDateString()}
+      `;
+      document.getElementById("contract-details").innerHTML = html;
+    }
+
+    async function payViewerFee() {
+      const contract = await Tezos.wallet.at(contractAddress);
+      const op = await contract.methods.AccessDocuments().send({ amount: 50 });
+      await op.confirmation();
+      setStatus("Viewer fee paid. Access granted.");
+    }
+
+    async function fundProject() {
+      const amount = parseFloat(document.getElementById("amount").value);
+      if (!amount) return;
+      const contract = await Tezos.wallet.at(contractAddress);
+      const op = await contract.methods.Fund().send({ amount });
+      await op.confirmation();
+      setStatus("Investment sent successfully.");
+    }
+
+    function setStatus(message) {
+      document.getElementById("status").innerText = message;
+    }
+  </script>
+</body>
+</html>
